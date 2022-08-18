@@ -7,12 +7,12 @@ import com.podo.daggerapplication.repo.RepoByProvide
 import javax.inject.Inject
 
 class ViewModelByBinds @Inject constructor(
-    //private val repoByProvide: RepoByProvide,
+    private val repoByProvide: RepoByProvide,
     private val repoByConstructor: RepoByConstructor,
-    //private val repoByBinds: IRepoByBinds
+    private val repoByBinds: IRepoByBinds
 ): IViewModelByBinds {
 
     override fun test() {
-        Log.d("DAGGER_TEST", "view model by binds")
+        Log.d("DAGGER_TEST", "view model by binds ${repoByConstructor.repoName}, ${repoByBinds.getName()}, and ${repoByProvide.repoName}")
     }
 }

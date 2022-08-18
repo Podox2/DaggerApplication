@@ -9,11 +9,12 @@ import javax.inject.Inject
 
 class ViewModelByProvide(
   private val repoByConstructor: RepoByConstructor,
+  private val repoByProvide: RepoByProvide,
   private val repoByBinds: IRepoByBinds
 ) {
 
   @Inject
-  lateinit var repoByProvide: RepoByProvide
+  lateinit var repoByProvideField: RepoByProvide
 
   init {
     val viewModelComponent = DaggerViewModelComponent.builder().build()
@@ -22,6 +23,6 @@ class ViewModelByProvide(
 
   fun test() = Log.d(
     "DAGGER_TEST",
-    "view model by provide, ${repoByConstructor.repoName}, ${repoByBinds.getName()},  and ${repoByProvide.repoName}"
+    "view model by provide, ${repoByConstructor.repoName}, ${repoByBinds.getName()}, ${repoByProvideField.repoName}  and ${repoByProvide.repoName}"
   )
 }

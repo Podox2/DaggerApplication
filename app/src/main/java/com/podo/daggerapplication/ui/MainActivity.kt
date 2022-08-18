@@ -2,8 +2,8 @@ package com.podo.daggerapplication.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.podo.daggerapplication.DaggerApplication
 import com.podo.daggerapplication.R.layout
-import com.podo.daggerapplication.di.component.DaggerActivityComponent
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -19,10 +19,8 @@ class MainActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(layout.activity_main)
 
-    val activityComponent = DaggerActivityComponent.builder()
-      .build()
+    (application as DaggerApplication).appComponent.inject(this)
 
-    activityComponent.inject(this)
     viewModelByConstructor.test()
     viewModelByProvide.test()
     viewModelByBinds.test()

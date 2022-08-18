@@ -7,6 +7,6 @@ import dagger.Provides
 @Module
 class RepoModule {
 
-  @Provides
-  fun provideRepo(): RepoByProvide = RepoByProvide()
+  /*@Provides
+  fun provideRepo(): RepoByProvide = RepoByProvide()*/
 }
