@@ -21,6 +21,6 @@ class ConcreteViewModel @Inject constructor(
 ) {
 
   fun test() {
-    Log.d("DAGGER_TAG", "ConcreteViewModel with ${concreteRepo.repoName()}, ${store.getName()}, ${hero.name}")
+    Log.d("DAGGER_TAG", "ConcreteViewModel with ${concreteRepo.repoName()}, ${store.getName()}, and ${hero.name}")
   }
 }
