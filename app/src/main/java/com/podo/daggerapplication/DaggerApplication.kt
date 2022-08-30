@@ -1,8 +1,8 @@
 package com.podo.daggerapplication
 
 import android.app.Application
-import com.podo.daggerapplication.di.component.AppComponent
-import com.podo.daggerapplication.di.component.DaggerAppComponent
+import com.podo.daggerapplication.di.AppComponent
+import com.podo.daggerapplication.di.DaggerAppComponent
 
 class DaggerApplication : Application() {
 

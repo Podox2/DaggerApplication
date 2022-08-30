@@ -1,4 +1,4 @@
-package com.podo.daggerapplication.di.component
+package com.podo.daggerapplication.di.qualifier
 
 import javax.inject.Qualifier
 

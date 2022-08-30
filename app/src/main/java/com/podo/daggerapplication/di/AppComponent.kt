@@ -1,7 +1,6 @@
-package com.podo.daggerapplication.di.component
+package com.podo.daggerapplication.di
 
 import android.content.Context
-import com.podo.daggerapplication.concrete_approach.ui.ConcreteActivity
 import com.podo.daggerapplication.di.module.AppModule
 import com.podo.daggerapplication.ui.MainActivity
 import dagger.BindsInstance
@@ -12,8 +11,9 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [AppModule::class])
 interface AppComponent {
+  val viewModelFactory: ViewModelFactory
+
   fun inject(mainActivity: MainActivity)
-  fun inject(concreteActivity: ConcreteActivity)
 
   @Component.Builder
   interface Builder {

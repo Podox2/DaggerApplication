@@ -1,4 +1,4 @@
-package com.podo.daggerapplication.concrete_approach.data
+package com.podo.daggerapplication.data
 
 import android.util.Log
 import javax.inject.Inject

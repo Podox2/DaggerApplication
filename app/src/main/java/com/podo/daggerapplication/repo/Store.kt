@@ -1,4 +1,4 @@
-package com.podo.daggerapplication.concrete_approach.repo
+package com.podo.daggerapplication.repo
 
 import javax.inject.Inject
 
