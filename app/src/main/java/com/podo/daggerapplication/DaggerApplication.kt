@@ -10,6 +10,12 @@ class DaggerApplication : Application() {
 
   override fun onCreate() {
     super.onCreate()
-    appComponent = DaggerAppComponent.create()
+    // якщо не треба провайдити зовнішні параметри, модулі, т.п., можна використати метод create()
+    //appComponent = DaggerAppComponent.create()
+
+    // для андроїда треба провайдити контекст, тому треба юзати білдер
+    appComponent = DaggerAppComponent.builder()
+      .withContext(this)
+      .build()
   }
 }
