@@ -18,12 +18,16 @@ import javax.inject.Provider
 class MainActivity : AppCompatActivity() {
 
   // в актівіті не можна інджектити в конструктор, тому інджектимо в поля
-  // так не правильно інджектити в'ю модель
+
+  // фабрику можна інджектити в поле
   @Inject
   lateinit var viewModelFactory: ViewModelFactory
-  lateinit var mainViewModel: MainViewModel
 
-  // якщо депенденсі потрібне не завжди, то можна вказати, що воно було впровайджене в момент виклику (лінива ініціалізація)
+  // в'ю модельку можна отримати кількома шляхами, але не можна її просто інджектити
+  // (бо в'ю модельку треба отримувати через спеціальну фабрику, а не через конструктор)
+  private lateinit var viewModel: MainViewModel
+
+  // якщо депенденсі потрібне не завжди, то можна вказати, щоб воно було впровайджене в момент виклику (лінива ініціалізація)
   @Inject
   lateinit var car: Lazy<Car>
 
@@ -39,14 +43,18 @@ class MainActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(layout.activity_main)
     (application as DaggerApplication).appComponent.inject(this)
+
+    // фабрику можна не іджектити, а мати як поле в компоненті
     //concreteViewModel = (application as DaggerApplication).appComponent.viewModelFactory.create(ConcreteViewModel::class.java)
+
+    // варіант, коли фабрика заінджекчена як поле актівіті
     //concreteViewModel = viewModelFactory.create(ConcreteViewModel::class.java)
-    mainViewModel = provideViewModel(viewModelFactory)
+    // також поле, але створення в'ю моделі через кастомний метод
+    viewModel = provideViewModel(viewModelFactory)
+    viewModel.test()
 
     // замінено ін'єкцією в метод
     //showHero(hero)
-
-    mainViewModel.test()
 
     // ініціалізація тільки в якийсь випадок
     val random = (0..2).shuffled().first()
@@ -58,6 +66,7 @@ class MainActivity : AppCompatActivity() {
 
   // ін'єкція в метод
   // використовується коли треба зробити якусь дію один раз, при наданні залежностей класу
+  // тобто в метод інджектиться аргумент hero
   // @Luna чомусь не спрацьовує
   @Inject
   @Luna

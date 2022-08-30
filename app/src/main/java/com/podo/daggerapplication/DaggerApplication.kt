@@ -13,7 +13,7 @@ class DaggerApplication : Application() {
     // якщо не треба провайдити зовнішні параметри, модулі, т.п., можна використати метод create()
     //appComponent = DaggerAppComponent.create()
 
-    // для андроїда треба провайдити контекст, тому треба юзати білдер
+    // для Андроїда треба часто провайдити контекст. в такому випадку треба юзати білдер
     appComponent = DaggerAppComponent.builder()
       .withContext(this)
       .build()

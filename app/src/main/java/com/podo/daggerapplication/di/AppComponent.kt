@@ -11,6 +11,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [AppModule::class])
 interface AppComponent {
+  // варіант коли фабрика - поле компоненту
   val viewModelFactory: ViewModelFactory
 
   fun inject(mainActivity: MainActivity)

@@ -11,12 +11,10 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
   // про ін'єкцію інтерфейсів написано в ConcreteRepoModule
   private val concreteRepo: Repo,
-  // тут відбувається ін'єкція конкретного класу, тому для Store не треба ніяких модулів. ін'єкції через конструктор достатньо.
-  // ConcreteViewModel  провайдиться актівіті таким ж шляхом
+  // тут відбувається ін'єкція конкретного класу, тому для Store не треба ніяких модулів. ін'єкції через конструктор достатньо
   private val store: Store,
-  // ін'єкція конкретного класу, але значення для конструктора не взяти з графа дагера. використовується @Provides в AppModule
+  // ін'єкція конкретного класу через @Provides в AppModule
   @Luna
-  //@Named("Luna")
   private val hero: Hero
 ) : ViewModel() {
 
