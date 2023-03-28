@@ -13,8 +13,11 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [AppModule::class])
 interface AppComponent {
+  // можна надавати якісь типи прямо з компоненту
   // варіант коли фабрика - поле компоненту
   val viewModelFactory: ViewModelFactory
+  // може бути як функція
+  //fun viewModelFactory(): ViewModelFactory
 
   // без Дагер Андроїда або Hilt'а треба інджектити актівіті і фрагменти через такі функції
   fun inject(mainActivity: MainActivity)

@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.podo.daggerapplication.DaggerApplication
 import com.podo.daggerapplication.R
+import com.podo.daggerapplication.appComponent
 import com.podo.daggerapplication.data.Car
 import com.podo.daggerapplication.data.CoolClass
 import com.podo.daggerapplication.data.CoolClassWithBuilder
@@ -52,7 +52,9 @@ class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
-    (application as DaggerApplication).appComponent.inject(this)
+    //(application as DaggerApplication).appComponent.inject(this)
+    appComponent.inject(this)
+
 
     findViewById<TextView>(R.id.tv_hello).setOnClickListener {
       startActivity(Intent(this, SecondActivity::class.java))

@@ -6,7 +6,7 @@ import com.podo.daggerapplication.di.DaggerAppComponent
 
 class DaggerApplication : Application() {
 
-  lateinit var appComponent: AppComponent
+  lateinit var daggerAppComponent: AppComponent
 
   override fun onCreate() {
     super.onCreate()
@@ -14,7 +14,7 @@ class DaggerApplication : Application() {
     //appComponent = DaggerAppComponent.create()
 
     // для Андроїда треба часто провайдити контекст. в такому випадку треба юзати білдер
-    appComponent = DaggerAppComponent.builder()
+    daggerAppComponent = DaggerAppComponent.builder()
       .withContext(this)
       .build()
   }
