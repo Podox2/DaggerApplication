@@ -1,4 +1,4 @@
-package com.podo.daggerapplication.di
+package com.podo.daggerapplication.di.extension
 
 import android.app.Activity
 import androidx.lifecycle.ViewModel

@@ -2,7 +2,9 @@ package com.podo.daggerapplication.di.module
 
 import android.content.Context
 import android.content.res.Resources
+import com.podo.daggerapplication.data.CoolClassWithBuilder
 import com.podo.daggerapplication.data.Hero
+import com.podo.daggerapplication.data.Person
 import com.podo.daggerapplication.di.qualifier.Luna
 import dagger.Module
 import dagger.Provides
@@ -31,4 +33,10 @@ class AppModule {
   // провайд, щоб десь використати контекст, як депенденсі
   @Provides
   fun provideResources(context: Context): Resources = context.resources
+
+  // провайд класа з білдером. використовується в Актівіті для ін'єкції в поле
+  @Provides
+  fun provideCoolClass(@Luna hero: Hero, person: Person): CoolClassWithBuilder {
+    return CoolClassWithBuilder.build(hero, person)
+  }
 }

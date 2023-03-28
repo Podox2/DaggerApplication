@@ -2,6 +2,7 @@ package com.podo.daggerapplication.di.module
 
 import com.podo.daggerapplication.repo.RepoImpl
 import com.podo.daggerapplication.repo.Repo
+import com.podo.daggerapplication.repo.RepoImplWithBuilder
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -11,15 +12,16 @@ import javax.inject.Named
 // тому що неможливо заінджектити конструктор інтерфейсу (його не існує)
 
 // краще використовувати @Binds - менше коду і кодогенерації
-// при @Binds клас повинен бути абстрактним (тоді і всі методи абстрактні) або інтерфейсом
+// при @Binds клас повинен бути абстрактним (тоді і всі методи абстрактні) або інтерфейсом (легший варіант, щоб не забути написати abstract)
 @Module
 interface ConcreteBindRepoModule {
   // в параметрах вказуємо тип, який будемо повертати
-  // а вернути ми його можемо, тому що коструктор класу помічений @Inject, тому дагер зможе дістати цей тип
+  // а вернути ми його можемо, якщо в класі є ін'єкція через конструктор, тому дагер зможе дістати цей тип
   // по суті ми байндимо тип Repo з RepoImpl. коли граф шукає тип Repo, то буде повертати RepoImpl
   @Binds
   fun bindConcreteModule(repoImpl: RepoImpl): Repo
 }
+
 
 // при @Provides використовуємо просто class, методи повинні мати реалізацію
 @Module
@@ -27,16 +29,17 @@ class ConcreteProvideRepoModule {
 
   @Provides
   // метод повертає то й ж тип, що і bindConcreteModule(), тому додана анотація @Named, щоб білдилось і щоб їх розрізняти
+  // такі провайди краще переробляти на @Binds, щоб було менше коду і кодогенерації
   @Named("by provide")
   fun provideConcreteModule(repoImpl: RepoImpl): Repo {
     return repoImpl
   }
 
-  // якщо немає інджекта конструктора, то потрібно самому створювати об'єкт
-  // наприклад, коли об'єкт створюється через білдер
+  // якщо ж немає інджекта конструктора, то потрібно самому створювати об'єкт
+  // наприклад, коли об'єкт створюється через білдер. В даному випадку не можливо використати @Binds
   @Provides
-  @Named("by provide?")
+  @Named("RepoImplWithBuilder")
   fun provideConcreteModule2(): Repo {
-    return RepoImpl()
+    return RepoImplWithBuilder.build()
   }
 }

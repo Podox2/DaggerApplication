@@ -1,15 +1,19 @@
 package com.podo.daggerapplication.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.podo.daggerapplication.DaggerApplication
-import com.podo.daggerapplication.R.layout
+import com.podo.daggerapplication.R
 import com.podo.daggerapplication.data.Car
+import com.podo.daggerapplication.data.CoolClass
+import com.podo.daggerapplication.data.CoolClassWithBuilder
 import com.podo.daggerapplication.data.Hero
 import com.podo.daggerapplication.data.Person
 import com.podo.daggerapplication.di.ViewModelFactory
-import com.podo.daggerapplication.di.provideViewModel
+import com.podo.daggerapplication.di.extension.provideViewModel
 import com.podo.daggerapplication.di.qualifier.Luna
 import dagger.Lazy
 import javax.inject.Inject
@@ -35,14 +39,24 @@ class MainActivity : AppCompatActivity() {
   @Inject
   lateinit var person: Provider<Person>
 
+  @Inject
+  lateinit var coolClass: CoolClass
+
+  @Inject
+  lateinit var coolClassWithBuilder: CoolClassWithBuilder
+
   // поле використовується в методі, який викликається одного разу при старті. можна замінити ін'єкцією в метод
   /*@Inject
   lateinit var hero: Hero*/
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(layout.activity_main)
+    setContentView(R.layout.activity_main)
     (application as DaggerApplication).appComponent.inject(this)
+
+    findViewById<TextView>(R.id.tv_hello).setOnClickListener {
+      startActivity(Intent(this, SecondActivity::class.java))
+    }
 
     // фабрику можна не іджектити, а мати як поле в компоненті
     //concreteViewModel = (application as DaggerApplication).appComponent.viewModelFactory.create(ConcreteViewModel::class.java)
@@ -62,6 +76,9 @@ class MainActivity : AppCompatActivity() {
       // треба робити get()
       car.get().doSomething()
     }
+
+    coolClass.doSomethingCool()
+    coolClassWithBuilder.doSomethingCool()
   }
 
   // ін'єкція в метод
