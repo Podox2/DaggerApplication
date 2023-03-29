@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
   @Inject
   lateinit var car: Lazy<Car>
 
-  // надає щоразу новий інстенс об'єкта. використовується в ViewModelFactory
+  // надає щоразу новий інстенс об'єкта. використовується, наприклад, для в ViewModelFactory
   @Inject
   lateinit var person: Provider<Person>
 
@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
     // ініціалізація тільки в якийсь випадок
     val random = (0..2).shuffled().first()
     if (random == 1) {
-      // треба робити get()
+      // для Lazy<> треба робити get()
       car.get().doSomething()
     }
 
